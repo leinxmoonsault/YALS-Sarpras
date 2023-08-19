@@ -29,7 +29,7 @@
                         <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
                             Login.
                         </h2>
-                        <form action="{{ route('prosesloginadmin') }}" method="post">
+                        <form action="{{ route('proseslogiadmin') }}" method="post">
                             @csrf
                             <div class="intro-x mt-8">
                                 <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 block" placeholder="Email" name="username">

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function LoginAdmin()
+    public function Login()
     {
         # code...
         return view('backend.login');
@@ -23,7 +23,7 @@ class AuthController extends Controller
 
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $data = Auth::user();
-            if ($data->role == 'Admin') {
+            if ($data->role == 'Admin' | $data->role == 'Sarpras') {
                 # code...
                 return redirect()->intended('YALS/Administrator/Home');
             }elseif ($data->role == 'Guru') {
@@ -32,14 +32,14 @@ class AuthController extends Controller
             }
         }
 
-        return redirect('YALS/Administrator/Login');
+        return redirect('/');
     }
     
-    public function LogoutAdmin(Request $request)
+    public function Logout(Request $request)
     {
         # code...
         Auth::logout();
-        return redirect('YALS/Administrator/Login');
+        return redirect('/');
     }
 
 }

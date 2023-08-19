@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CekRoleAdmin
+class CekRole
 {
     /**
      * Handle an incoming request.
