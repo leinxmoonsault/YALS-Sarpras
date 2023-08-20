@@ -8,7 +8,12 @@
         <title>Admin - Sarpras - SMA YAPPENDA</title>
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="{{ asset('back/css/app.css') }}" />
+        <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
         <!-- END: CSS Assets-->
+        <!-- BEGIN: JS Assets -->
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>.
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <!-- END: JS Assets-->
     </head>
     <!-- END: Head -->
     <body class="main">
@@ -46,7 +51,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="top-menu">
+                                <a href="{{ route('homekelas') }}" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="list"></i> </div>
                                     <div class="top-menu__title"> Data Kelas </div>
                                 </a>
@@ -54,7 +59,7 @@
                             <li>
                                 <a href="#" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="list"></i> </div>
-                                    <div class="top-menu__title"> Top Menu </div>
+                                    <div class="top-menu__title"> Data Barang </div>
                                 </a>
                             </li>
                         </ul>
@@ -148,15 +153,6 @@
                     <!-- BEGIN: Breadcrumb -->
                         <div class="-intro-x breadcrumb mr-auto"> <a href="">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="" class="breadcrumb--active">Dashboard</a> </div>
                     <!-- END: Breadcrumb -->
-                    <!-- BEGIN: Search -->
-                        <div class="intro-x relative mr-3 sm:mr-6">
-                            <div class="search hidden sm:block">
-                                <input type="text" class="search__input form-control dark:bg-dark-1 border-transparent placeholder-theme-8" placeholder="Search...">
-                                <i data-feather="search" class="search__icon dark:text-gray-300"></i> 
-                            </div>
-                            <a class="notification sm:hidden" href=""> <i data-feather="search" class="notification__icon dark:text-gray-300"></i> </a>
-                        </div>
-                    <!-- END: Search -->
                     <!-- BEGIN: Account Menu -->
                     <div class="intro-x dropdown w-8 h-8">
                         <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110" role="button" aria-expanded="false">
@@ -165,16 +161,21 @@
                         <div class="dropdown-menu w-56">
                             <div class="dropdown-menu__content box bg-theme-11 dark:bg-dark-6 text-white">
                                 <div class="p-4 border-b border-theme-12 dark:border-dark-3">
-                                    <div class="font-medium">Name</div>
-                                    <div class="text-xs text-theme-13 mt-0.5 dark:text-gray-600">Status</div>
+                                    <div class="font-medium">{{auth()->user()->nama}}</div>
+                                    <div class="text-xs text-theme-13 mt-0.5 dark:text-gray-600">{{auth()->user()->role}}</div>
                                 </div>
                                 <div class="p-2">
                                     <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="user" class="w-4 h-4 mr-2"></i> Profile </a>
-                                    <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="lock" class="w-4 h-4 mr-2"></i> Reset Password </a>
+                                    {{-- <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="lock" class="w-4 h-4 mr-2"></i> Reset Password </a> --}}
                                     <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="help-circle" class="w-4 h-4 mr-2"></i> Help </a>
                                 </div>
                                 <div class="p-2 border-t border-theme-12 dark:border-dark-3">
-                                    <a href="" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md"> <i data-feather="toggle-right" class="w-4 h-4 mr-2"></i> Logout </a>
+                                    <a href="{{ route('pagelogoutadmin') }}" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-theme-1 dark:hover:bg-dark-3 rounded-md" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                        <form action="{{ route('pagelogoutadmin') }}" id="logout-form"  method="post">
+                                            @csrf
+                                        </form>
+                                        <i data-feather="toggle-right" class="w-4 h-4 mr-2"></i> Logout 
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -205,7 +206,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="top-menu">
+                                <a href="{{ route('homekelas') }}" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="list"></i> </div>
                                     <div class="top-menu__title"> Data Kelas </div>
                                 </a>
@@ -213,7 +214,7 @@
                             <li>
                                 <a href="#" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="list"></i> </div>
-                                    <div class="top-menu__title"> Top Menu </div>
+                                    <div class="top-menu__title"> Data Barang </div>
                                 </a>
                             </li>
                         </ul>
@@ -297,8 +298,7 @@
         <!-- END: Top Menu -->
         @yield('content')
         <!-- BEGIN: JS Assets-->
-            <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-            <script src="https://maps.googleapis.com/maps/api/js?key=["your-google-map-api"]&libraries=places"></script>
+        @stack('scripts')
             <script src="{{ asset('back/js/app.js') }}"></script>
         <!-- END: JS Assets-->
     </body>

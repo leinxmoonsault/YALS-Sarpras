@@ -15,19 +15,23 @@ class CekRole
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, ...$role)
     {
         if (!Auth::check()) {
             # code...
             return redirect('/');
         } 
          
-            $user = Auth::user();
-            if ($user->role == $role) {
-                # code...
-                return $next($request);
-            }
+        // $user = Auth::user();
+        // if ($user->role == $role) {
+        //     # code...
 
+        // }
+
+        if (in_array($request->user()->role,$role)) {
+            # code...
+            return $next($request);
+        }
         Auth::logout();
         return redirect('/')->with('error', 'Access Denied!!!');
     }

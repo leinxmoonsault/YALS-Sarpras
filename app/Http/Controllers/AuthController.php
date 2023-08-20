@@ -23,12 +23,13 @@ class AuthController extends Controller
 
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $data = Auth::user();
-            if ($data->role == 'Admin' | $data->role == 'Sarpras') {
+            if ($data->role == 'Admin' || $data->role == 'Sarpras') {
                 # code...
                 return redirect()->intended('YALS/Administrator/Home');
-            }elseif ($data->role == 'Guru') {
+            }else {
                 # code...
-                return redirect()->intended('YALS/Guru/Home');
+                Auth::logout();
+                return redirect('/')->with('error', 'Access Denied!!!');
             }
         }
 

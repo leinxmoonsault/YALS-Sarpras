@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ManageKelasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[\App\Http\Controllers\AuthController::class, 'Login'])->name('Login');
+Route::get('/',[\App\Http\Controllers\AuthController::class, 'Login'])->name('login');
 Route::post('/Login/Process', [\App\Http\Controllers\AuthController::class, 'ProsesLoginAdmin'])->name('proseslogiadmin');
 Route::post('/Logout', [\App\Http\Controllers\AuthController::class, 'Logout'])->name('pagelogoutadmin');
 
 // Admin
-Route::group(['middleware' => ['auth','cekRole:Admin|Sarpras']], function (){
-    Route::get('YALS/Administrator/Home',[\App\Http\Controllers\BackendController::class, 'Home'])->name('home');
+Route::group(['middleware'  =>  ['auth', 'cekRole:Admin,Sarpras']], function (){
+    Route::get('YALS/Administrator/Home', [\App\Http\Controllers\AdminController::class, 'index'])->name('home');
 
+    Route::group(['prefix'  =>  'YALS/Administrator/Manage/Kelas/'], function (){
+        Route::get('/', [\App\Http\Controllers\ManageKelasController::class, 'index'])->name('homekelas');
+        Route::get('List', [\App\Http\Controllers\ManageKelasController::class, 'getKelas'])->name('kelas.list');
+        Route::resource('Action', ManageKelasController::class);
+    });
 });

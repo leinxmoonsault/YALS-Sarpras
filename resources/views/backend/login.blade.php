@@ -4,10 +4,10 @@
     <!-- BEGIN: Head -->
     <head>
         <meta charset="utf-8">
-        <link href="{{ asset('front/images/logo/logo-simple.png') }}" rel="shortcut icon">
+        <link href="{{ asset('back/images/logo.png') }}" rel="shortcut icon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Lein">
-        <title>Administrator SMK BIT BINA AULIA</title>
+        <title>Sarpras - SMA YAPPENDA</title>
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="{{ asset('back/css/app.css') }}"/>
         <!-- END: CSS Assets-->
@@ -19,7 +19,7 @@
                 <!-- BEGIN: Login Info -->
                 <div class="hidden xl:flex flex-col min-h-screen">
                     <div class="my-auto">
-                        <img alt="Logo Sekolah" class="-intro-x w-1/2 -mt-16" src="{{ asset('front/images/logo/logo-simple.png') }}">
+                        <img alt="Logo Sekolah" class="-intro-x w-1/2 -mt-16" src="{{ asset('back/images/logo.png') }}">
                     </div>
                 </div>
                 <!-- END: Login Info -->
@@ -32,7 +32,7 @@
                         <form action="{{ route('proseslogiadmin') }}" method="post">
                             @csrf
                             <div class="intro-x mt-8">
-                                <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 block" placeholder="Email" name="username">
+                                <input type="text" class="intro-x login__input form-control py-3 px-4 border-gray-300 block" placeholder="Username" name="username">
                                 <input type="password" class="intro-x login__input form-control py-3 px-4 border-gray-300 block mt-4" placeholder="Password" name="password">
                             </div>
                             <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
