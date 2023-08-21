@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ManageKelasController;
+use App\Http\Controllers\ManageSarprasKelasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +23,15 @@ Route::post('/Logout', [\App\Http\Controllers\AuthController::class, 'Logout'])-
 Route::group(['middleware'  =>  ['auth', 'cekRole:Admin,Sarpras']], function (){
     Route::get('YALS/Administrator/Home', [\App\Http\Controllers\AdminController::class, 'index'])->name('home');
 
-    Route::group(['prefix'  =>  'YALS/Administrator/Manage/Kelas/'], function (){
+    Route::group(['prefix'  =>  'YALS/Administrator/Manage/Kelas/'], function () {
         Route::get('/', [\App\Http\Controllers\ManageKelasController::class, 'index'])->name('homekelas');
         Route::get('List', [\App\Http\Controllers\ManageKelasController::class, 'getKelas'])->name('kelas.list');
         Route::resource('Action', ManageKelasController::class);
+    });
+
+    Route::group(['prefix'  =>  'YALS/Administrator/Manage/Barang/'], function () {
+        Route::get('/', [\App\Http\Controllers\ManageSarprasKelasController::class, 'index'])->name('homesarpraskelas');      
+        Route::get('List', [\App\Http\Controllers\ManageSarprasKelasController::class,'getSarprasKelas'])->name('saprasKelas.list');
+        Route::resource('Aksi', ManageSarprasKelasController::class);
     });
 });
