@@ -29,8 +29,9 @@ Route::group(['middleware'  =>  ['auth', 'cekRole:Admin,Sarpras']], function (){
         Route::resource('Action', ManageKelasController::class);
     });
 
-    Route::group(['prefix'  =>  'YALS/Administrator/Manage/Barang/'], function () {
+    Route::group(['prefix'  =>  'YALS/Administrator/Manage/Sarpras/Kelas/'], function () {
         Route::get('/', [\App\Http\Controllers\ManageSarprasKelasController::class, 'index'])->name('homesarpraskelas');      
+        Route::get('Edit', [\App\Http\Controllers\ManageSarprasKelasController::class,'editDataSarprasKelas'])->name('editdatasarpras');
         Route::get('List', [\App\Http\Controllers\ManageSarprasKelasController::class,'getSarprasKelas'])->name('saprasKelas.list');
         Route::resource('Aksi', ManageSarprasKelasController::class);
     });

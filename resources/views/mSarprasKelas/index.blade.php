@@ -21,10 +21,10 @@
                                         Data Sarpras Kelas
                                     </h2>
                                     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                                        <a href="{{ route('Action.create')}}" class="btn btn-primary shadow-md mr-2" role="button">Tambah Sarpras Kelas</a>
+                                        <a href="{{ route('Aksi.create')}}" class="btn btn-primary shadow-md mr-2" role="button">Tambah Sarpras Kelas</a>
                                     </div>
                                     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
-                                        <a href="{{ route('Action.edit')}}" class="btn btn-primary shadow-md mr-2" role="button">Edit Sarpras Kelas</a>
+                                        <a href="{{ route('editdatasarpras')}}" class="btn btn-primary shadow-md mr-2" role="button">Edit Sarpras Kelas</a>
                                     </div>
                                 </div>
                                 <div class="p-5">
@@ -61,42 +61,18 @@
         var table = $('.yajra-datatable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('kelas.list') }}",
+            ajax: "{{ route('saprasKelas.list') }}",
             columns: [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                 {data: 'nama_barang', name: 'nama barang'},
                 {data: 'jumlah_barang', name: 'jumlah barang'},
                 {data: 'kondisi', name: 'kondisi'},
-                {data: 'lantai', name: 'lokasi'},
-                {data: 'nama_kelas', name: 'kelas'},
-                {data: 'lantai', name: 'lantai'},
+                {data: 'ruang', name: 'lokasi'},
                 {
                     orderable: true, 
                     searchable: true
                 },
             ]
-        });
-
-        $('.yajra-datatable').on('click', '.delete', function(e) {
-            e.preventDefault();
-
-            var url = $(this).attr('action');
-            if (confirm('Hapus Kelas Ini ?')) {
-                $.ajax({
-                    url: url,
-                    type: 'DELETE',
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                    },
-                    success: function(response) {
-                        console.log(response.message);
-                        table.ajax.reload();
-                    },
-                    error: function(xhr) {
-                        console.log(xhr.responseText);
-                    }
-                });
-            }
         });
     });
 </script>

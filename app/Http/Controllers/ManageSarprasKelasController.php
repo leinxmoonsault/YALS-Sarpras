@@ -18,25 +18,25 @@ class ManageSarprasKelasController extends Controller
         return view('msarpraskelas.index');
     }
 
-    public function getKelas(Request $request) {
+    public function getSarprasKelas(Request $request) {
         if ($request->ajax()) {
-            $data = SarprasKelas::orderBy('id', 'asc')->get();
+            $data = SarprasKelas::leftJoin('kelas','sarpras_kelas.id_kelas_sarpras','=','kelas.id_kelas')
+            ->select('sarpras_kelas.*','kelas.nama_kelas','kelas.lantai')
+            ->orderBy('id', 'asc')
+            ->get();
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $editBtn = '<a href="'. route("Aksi.edit", $row->id) .'" class="edit btn btn-success btn-sm mb-2">Edit</a>';
-
-                    $deleteForm = '<form class="delete" action="' . route("Aksi.destroy", $row->id) . '" method="POST" onsubmit="return confirm(\'Hapus Data Kelas Ini ?\')">
-                                    ' . csrf_field() . '
-                                    ' . method_field('DELETE') . '
-                                    <input type="submit" value="Delete" class="btn btn-danger btn-sm">
-                                    </form>';
-
-                    return $editBtn . ' ' . $deleteForm;
+                ->addColumn('ruang', function($row){
+                    return $row->nama_kelas . ' / ' . $row->lantai;
                 })
-                ->rawColumns(['action'])
                 ->make(true);
         }
+    }
+
+    public function editDataSarprasKelas() {
+        $data = \App\Models\SarprasKelas::all();
+        
+        return view('msarpraskelas.edit', ['data' => $data]);
     }
 
 
@@ -47,7 +47,8 @@ class ManageSarprasKelasController extends Controller
      */
     public function create()
     {
-        //
+        $data = \App\Models\Kelas::all();
+        return view('msarpraskelas.create', ['kelas' => $data]);
     }
 
     /**

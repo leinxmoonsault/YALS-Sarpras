@@ -10,10 +10,6 @@
         <link rel="stylesheet" href="{{ asset('back/css/app.css') }}" />
         <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
         <!-- END: CSS Assets-->
-        <!-- BEGIN: JS Assets -->
-        <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>.
-        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-        <!-- END: JS Assets-->
     </head>
     <!-- END: Head -->
     <body class="main">
@@ -51,15 +47,21 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="#" class="top-menu">
+                                    <div class="top-menu__icon"> <i data-feather="list"></i> </div>
+                                    <div class="top-menu__title"> Data Sarpras Ruangan </div>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('homekelas') }}" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="list"></i> </div>
                                     <div class="top-menu__title"> Data Kelas </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="top-menu">
+                                <a href="{{ route('homesarpraskelas') }}" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="list"></i> </div>
-                                    <div class="top-menu__title"> Data Barang </div>
+                                    <div class="top-menu__title"> Data Sarpras Kelas </div>
                                 </a>
                             </li>
                         </ul>
@@ -206,15 +208,21 @@
                                 </a>
                             </li>
                             <li>
+                                <a href="#" class="top-menu">
+                                    <div class="top-menu__icon"> <i data-feather="list"></i> </div>
+                                    <div class="top-menu__title"> Data Sarpras Ruangan </div>
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('homekelas') }}" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="list"></i> </div>
                                     <div class="top-menu__title"> Data Kelas </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="top-menu">
+                                <a href="{{ route('homesarpraskelas') }}" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="list"></i> </div>
-                                    <div class="top-menu__title"> Data Barang </div>
+                                    <div class="top-menu__title"> Data Sarpras Kelas </div>
                                 </a>
                             </li>
                         </ul>
@@ -298,8 +306,10 @@
         <!-- END: Top Menu -->
         @yield('content')
         <!-- BEGIN: JS Assets-->
+        <script src="{{ asset('back/js/app.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>.
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
         @stack('scripts')
-            <script src="{{ asset('back/js/app.js') }}"></script>
         <!-- END: JS Assets-->
     </body>
 </html>
