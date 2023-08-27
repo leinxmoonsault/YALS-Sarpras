@@ -158,7 +158,7 @@
                     <!-- BEGIN: Account Menu -->
                     <div class="intro-x dropdown w-8 h-8">
                         <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110" role="button" aria-expanded="false">
-                            <img alt="Icewall Tailwind HTML Admin Template" src="dist/images/profile-8.jpg">
+                            <img alt="Icewall Tailwind HTML Admin Template" src="{{ asset('back/images/admin.png') }}">
                         </div>
                         <div class="dropdown-menu w-56">
                             <div class="dropdown-menu__content box bg-theme-11 dark:bg-dark-6 text-white">

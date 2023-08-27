@@ -33,6 +33,7 @@ Route::group(['middleware'  =>  ['auth', 'cekRole:Admin,Sarpras']], function (){
         Route::get('/', [\App\Http\Controllers\ManageSarprasKelasController::class, 'index'])->name('homesarpraskelas');      
         Route::get('Edit', [\App\Http\Controllers\ManageSarprasKelasController::class,'editDataSarprasKelas'])->name('editdatasarpras');
         Route::get('List', [\App\Http\Controllers\ManageSarprasKelasController::class,'getSarprasKelas'])->name('saprasKelas.list');
+        Route::get('Existed/{id}', [\App\Http\Controllers\ManageSarprasKelasController::class,'getExistedData'])->name('getExisted.data');
         Route::resource('Aksi', ManageSarprasKelasController::class);
     });
 });

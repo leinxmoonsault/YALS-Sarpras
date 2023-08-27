@@ -68,7 +68,7 @@ class ManageKelasController extends Controller
         }else {
             # code...
             $delete = preg_replace('/\D/', '', $carikls);
-            $idkls = 'Kelas-'.str_pad($delete+1,4,"0",STR_PAD_LEFT);
+            $idkls = 'KLS-'.str_pad($delete+1,4,"0",STR_PAD_LEFT);
         }
 
         $new_kelas->id_kelas = $idkls;

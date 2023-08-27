@@ -69,6 +69,8 @@
                 {data: 'kondisi', name: 'kondisi'},
                 {data: 'ruang', name: 'lokasi'},
                 {
+                    data: 'keterangan', 
+                    name: 'keterangan',
                     orderable: true, 
                     searchable: true
                 },
