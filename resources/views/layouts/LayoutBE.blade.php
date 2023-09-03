@@ -79,9 +79,9 @@
                                 </a>
                                 <ul class="">
                                     <li>
-                                        <a href="#" class="top-menu">
+                                        <a href="{{ route('homelaporansarpraskelas') }}" class="top-menu">
                                             <div class="top-menu__icon"> <i data-feather="file-plus"></i> </div>
-                                            <div class="top-menu__title">Sarana Kelas Rusak</div>
+                                            <div class="top-menu__title">Sarana Kelas</div>
                                         </a>
                                     </li>
                                     <li>
@@ -240,9 +240,9 @@
                                 </a>
                                 <ul class="">
                                     <li>
-                                        <a href="#" class="top-menu">
+                                        <a href="{{ route('homelaporansarpraskelas') }}" class="top-menu">
                                             <div class="top-menu__icon"> <i data-feather="file-plus"></i> </div>
-                                            <div class="top-menu__title">Sarana Kelas Rusak</div>
+                                            <div class="top-menu__title">Sarana Kelas</div>
                                         </a>
                                     </li>
                                     <li>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 20, 2023 at 09:54 PM
+-- Generation Time: Sep 03, 2023 at 11:12 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -58,13 +58,37 @@ CREATE TABLE `kelas` (
 
 INSERT INTO `kelas` (`id`, `id_kelas`, `nama_kelas`, `lantai`, `created_at`, `updated_at`) VALUES
 (9, 'KLS-0001', 'X-1', 'Lantai 2', '2023-08-20 12:14:27', '2023-08-20 12:14:27'),
-(10, 'Kelas-0002', 'X-2', 'Lantai 1', '2023-08-20 12:21:30', '2023-08-20 12:21:30'),
-(11, 'Kelas-0003', 'X-3', 'Lantai 1', '2023-08-20 12:21:38', '2023-08-20 12:21:38'),
-(12, 'Kelas-0004', 'X-4', 'Lantai 1', '2023-08-20 12:21:47', '2023-08-20 12:21:47'),
-(13, 'Kelas-0005', 'X-5', 'Lantai 1', '2023-08-20 12:21:57', '2023-08-20 12:21:57'),
-(14, 'Kelas-0006', 'X-6', 'Lantai 1', '2023-08-20 12:22:05', '2023-08-20 12:22:05'),
-(15, 'Kelas-0007', 'X-7', 'Lantai 1', '2023-08-20 12:22:16', '2023-08-20 12:22:16'),
-(17, 'Kelas-0008', 'X-8', 'Lantai 2', '2023-08-20 12:37:42', '2023-08-20 12:54:15');
+(18, 'KLS-0002', 'X-2', 'Lantai 1', '2023-08-27 01:41:57', '2023-08-27 01:41:57'),
+(19, 'KLS-0003', 'X-3', 'Lantai 1', '2023-08-27 01:42:04', '2023-08-27 01:42:04'),
+(20, 'KLS-0004', 'X-4', 'Lantai 1', '2023-08-27 01:42:19', '2023-08-27 01:42:19'),
+(21, 'KLS-0005', 'X-5', 'Lantai 1', '2023-08-27 01:42:24', '2023-08-27 01:42:24'),
+(22, 'KLS-0006', 'X-6', 'Lantai 1', '2023-08-27 01:42:34', '2023-08-27 01:42:34'),
+(23, 'KLS-0007', 'X-7', 'Lantai 1', '2023-08-27 01:42:42', '2023-08-27 01:42:42'),
+(24, 'KLS-0008', 'X-8', 'Lantai 2', '2023-08-27 01:42:50', '2023-08-27 01:42:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `laporan`
+--
+
+CREATE TABLE `laporan` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `id_laporan` varchar(100) NOT NULL,
+  `nama_laporan` varchar(100) NOT NULL,
+  `file_laporan` varchar(255) NOT NULL,
+  `tanggal_laporan` date NOT NULL,
+  `update_by` varchar(100) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `laporan`
+--
+
+INSERT INTO `laporan` (`id`, `id_laporan`, `nama_laporan`, `file_laporan`, `tanggal_laporan`, `update_by`, `created_at`, `updated_at`) VALUES
+(123, 'SMA-YAPPENDA/LAP/SPS/KLS/001', 'Laporan-Sarpras-X-1-2023-09-03.pdf', 'C:\\xampp\\htdocs\\YALS-Sarpras\\public\\Laporan/Sarpras-Kelas/Laporan-Sarpras-X-1-2023-09-03.pdf', '2023-09-03', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-03 08:08:22', '2023-09-03 08:08:22');
 
 -- --------------------------------------------------------
 
@@ -88,7 +112,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2023_08_09_010911_kelas', 1),
-(6, '2023_08_09_012654_sarpras_kelas', 1);
+(6, '2023_08_09_012654_sarpras_kelas', 1),
+(7, '2023_09_02_132021_laporan', 2);
 
 -- --------------------------------------------------------
 
@@ -128,7 +153,8 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `sarpras_kelas` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `id_kelas` varchar(255) NOT NULL,
+  `id_kelas_sarpras` varchar(255) NOT NULL,
+  `id_barang_sarpras` varchar(20) NOT NULL,
   `nama_barang` varchar(100) NOT NULL,
   `jumlah_barang` varchar(15) NOT NULL,
   `kondisi` varchar(25) NOT NULL,
@@ -137,6 +163,16 @@ CREATE TABLE `sarpras_kelas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sarpras_kelas`
+--
+
+INSERT INTO `sarpras_kelas` (`id`, `id_kelas_sarpras`, `id_barang_sarpras`, `nama_barang`, `jumlah_barang`, `kondisi`, `keterangan`, `update_by`, `created_at`, `updated_at`) VALUES
+(1, 'KLS-0001', 'SRPSKLS-0001', 'Meja', '40', 'Bagus', '-', 'Reshita Gusti Vianinggar, S.Pd', '2023-08-26 16:28:21', '2023-08-26 16:28:21'),
+(5, 'KLS-0001', 'SRPSKLS-00002', 'Kursi', '40', 'Bagus', '-', 'Reshita Gusti Vianinggar, S.Pd', '2023-08-27 01:45:17', '2023-08-27 01:45:17'),
+(6, 'KLS-0001', 'SRPSKLS-00003', 'Papan Tulis', '1', 'Bagus', '-', 'Reshita Gusti Vianinggar, S.Pd', '2023-08-27 01:45:17', '2023-08-27 07:10:21'),
+(7, 'KLS-0002', 'SRPSKLS-00004', 'Meja', '40', 'Bagus', '-', 'Reshita Gusti Vianinggar, S.Pd', '2023-08-27 01:45:58', '2023-08-27 01:45:58');
 
 -- --------------------------------------------------------
 
@@ -183,6 +219,12 @@ ALTER TABLE `kelas`
   ADD UNIQUE KEY `id_kelas` (`id_kelas`);
 
 --
+-- Indexes for table `laporan`
+--
+ALTER TABLE `laporan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -206,7 +248,8 @@ ALTER TABLE `personal_access_tokens`
 -- Indexes for table `sarpras_kelas`
 --
 ALTER TABLE `sarpras_kelas`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_barang_sarpras` (`id_barang_sarpras`);
 
 --
 -- Indexes for table `users`
@@ -229,13 +272,19 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `laporan`
+--
+ALTER TABLE `laporan`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -247,7 +296,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `sarpras_kelas`
 --
 ALTER TABLE `sarpras_kelas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`

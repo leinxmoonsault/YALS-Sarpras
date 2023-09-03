@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LaporanSarprasKelasController;
 use App\Http\Controllers\ManageKelasController;
 use App\Http\Controllers\ManageSarprasKelasController;
 use Illuminate\Support\Facades\Route;
@@ -35,5 +36,13 @@ Route::group(['middleware'  =>  ['auth', 'cekRole:Admin,Sarpras']], function (){
         Route::get('List', [\App\Http\Controllers\ManageSarprasKelasController::class,'getSarprasKelas'])->name('saprasKelas.list');
         Route::get('Existed/{id}', [\App\Http\Controllers\ManageSarprasKelasController::class,'getExistedData'])->name('getExisted.data');
         Route::resource('Aksi', ManageSarprasKelasController::class);
+    });
+    
+    Route::group(['prefix'  =>  'YALS/Administrator/Laporan/Sarpras/Kelas/'], function () {
+        Route::get('/', [\App\Http\Controllers\LaporanSarprasKelasController::class, 'index'])->name('homelaporansarpraskelas');      
+        Route::get('List', [\App\Http\Controllers\LaporanSarprasKelasController::class,'getLaporanSarprasKelas'])->name('laporanSaprasKelas.list');
+        Route::get('Existed/{id}', [\App\Http\Controllers\LaporanSarprasKelasController::class,'getExistedLaporanData'])->name('getExistedLaporan.data');
+        Route::get('Pass/Cetak-Laporan-Sarpras/{id}',[\App\Http\Controllers\LaporanSarprasKelasController::class, 'print_laporan_sarpras'])->name('print_laporan_sarpras');
+        Route::resource('Pass', LaporanSarprasKelasController::class);
     });
 });
