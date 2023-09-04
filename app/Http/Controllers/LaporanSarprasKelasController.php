@@ -8,6 +8,7 @@ use App\Models\SarprasKelas;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Yajra\DataTables\Facades\DataTables;
 
 class LaporanSarprasKelasController extends Controller
@@ -30,7 +31,7 @@ class LaporanSarprasKelasController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $editBtn = '<a href="'. route("Pass.show", $row->id) .'" class="edit btn btn-success btn-sm mb-2">Edit</a>';
+                    $editBtn = '<a href="'. route("Pass.show", $row->id) .'" class="edit btn btn-primary btn-sm mb-2" target="_blank">Show</a>';
 
                     $deleteForm = '<form class="delete" action="' . route("Pass.destroy", $row->id) . '" method="POST" onsubmit="return confirm(\'Hapus Data Kelas Ini ?\')">
                                     ' . csrf_field() . '
@@ -104,6 +105,7 @@ class LaporanSarprasKelasController extends Controller
 
         // Insert Ke Database
         $new_laporan->id_laporan        = $idlap;
+        $new_laporan->id_kelas_laporan  = $request->get('kelas');
         $new_laporan->nama_laporan      = $nama_laporan;
         $new_laporan->tanggal_laporan   = $newdate;
         $new_laporan->file_laporan      = $savePDF;
@@ -137,9 +139,12 @@ class LaporanSarprasKelasController extends Controller
      * @param  \App\Models\Laporan  $laporan
      * @return \Illuminate\Http\Response
      */
-    public function show(Laporan $laporan)
+    public function show($id)
     {
-        //
+        $item = Laporan::findOrFail($id);
+        $predata    = SarprasKelas::where('id_kelas_sarpras','=',$item->id_kelas_laporan)->get();
+        $pdf = PDF::loadView('mlaporankelas.laporan', ['data' => $predata,'i' => 0]);
+        return $pdf->stream("", array("Attachment" => false));
     }
 
     /**
@@ -171,8 +176,17 @@ class LaporanSarprasKelasController extends Controller
      * @param  \App\Models\Laporan  $laporan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Laporan $laporan)
+    public function destroy($id)
     {
-        //
+        $item = Laporan::findOrFail($id);
+        $get_nama_laporan = $item->nama_laporan;
+
+        if ($get_nama_laporan && file_exists(public_path('Laporan/Sarpras-Kelas/'.$get_nama_laporan))) {
+            File::delete(public_path('Laporan/Sarpras-Kelas/'.$get_nama_laporan));
+        }
+
+        $item->delete();
+
+        return response()->json(['message' => 'Data deleted successfully']);
     }
 }

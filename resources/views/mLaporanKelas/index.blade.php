@@ -73,6 +73,28 @@
                 },
             ]
         });
+
+        $('.yajra-datatable').on('click', '.delete', function(e) {
+            e.preventDefault();
+
+            var url = $(this).attr('action');
+            if (confirm('Hapus Kelas Ini ?')) {
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                    },
+                    success: function(response) {
+                        console.log(response.message);
+                        table.ajax.reload();
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            }
+        });
     });
 </script>
 @endpush
