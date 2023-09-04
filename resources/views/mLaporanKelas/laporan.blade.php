@@ -5,9 +5,8 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>Laporan Sarpras Kelas</title>
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
       <style>
-            @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css');
-
             table {
                   border-collapse: collapse;
                   width: 100%;
@@ -49,7 +48,14 @@
                   @endforeach
                   </tbody>
             </table>
-      </div>
+            <div>
+                  <p class="text-end">
+                        <?php echo "Jakarta,".date("d-M-Y"); ?>
+                  </p>
+                  <div>
+                        <img src="{{ public_path('Laporan/ttd.png') }}" alt="TTD">
+                  </div>
+            </div>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>
