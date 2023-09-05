@@ -202,7 +202,7 @@
                         </a>
                         <ul class="">
                             <li>
-                                <a href="#" class="top-menu">
+                                <a href="{{ route('homeruangan') }}" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="list"></i> </div>
                                     <div class="top-menu__title"> Data Ruangan </div>
                                 </a>

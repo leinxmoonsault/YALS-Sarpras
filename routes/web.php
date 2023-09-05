@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LaporanSarprasKelasController;
 use App\Http\Controllers\ManageKelasController;
+use App\Http\Controllers\ManageRuanganController;
 use App\Http\Controllers\ManageSarprasKelasController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +38,21 @@ Route::group(['middleware'  =>  ['auth', 'cekRole:Admin,Sarpras']], function (){
         Route::get('Existed/{id}', [\App\Http\Controllers\ManageSarprasKelasController::class,'getExistedData'])->name('getExisted.data');
         Route::resource('Aksi', ManageSarprasKelasController::class);
     });
+
+    Route::group(['prefix'  =>  'YALS/Administrator/Manage/Ruangan/'], function () {
+        Route::get('/', [\App\Http\Controllers\ManageRuanganController::class, 'index'])->name('homeruangan');
+        Route::get('List', [\App\Http\Controllers\ManageRuanganController::class, 'getRuangan'])->name('ruangan.list');
+        Route::resource('Go', ManageRuanganController::class);
+    });
     
+    Route::group(['prefix'  =>  'YALS/Administrator/Manage/Sarpras/Ruangan/'], function () {
+        Route::get('/', [\App\Http\Controllers\ManageSarprasKelasController::class, 'index'])->name('homesarpraskelas');      
+        Route::get('Edit', [\App\Http\Controllers\ManageSarprasKelasController::class,'editDataSarprasKelas'])->name('editdatasarpras');
+        Route::get('List', [\App\Http\Controllers\ManageSarprasKelasController::class,'getSarprasKelas'])->name('saprasKelas.list');
+        Route::get('Existed/{id}', [\App\Http\Controllers\ManageSarprasKelasController::class,'getExistedData'])->name('getExisted.data');
+        Route::resource('Aksi', ManageSarprasKelasController::class);
+    });
+
     Route::group(['prefix'  =>  'YALS/Administrator/Laporan/Sarpras/Kelas/'], function () {
         Route::get('/', [\App\Http\Controllers\LaporanSarprasKelasController::class, 'index'])->name('homelaporansarpraskelas');      
         Route::get('List', [\App\Http\Controllers\LaporanSarprasKelasController::class,'getLaporanSarprasKelas'])->name('laporanSaprasKelas.list');
