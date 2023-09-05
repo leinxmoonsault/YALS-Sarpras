@@ -29,7 +29,7 @@
                         </a>
                         <ul class="menu__sub-open">
                             <li>
-                        <a href="#" class="top-menu top-menu--active">
+                        <a href="{{ route('home') }}" class="top-menu top-menu--active">
                             <div class="top-menu__icon"> <i data-feather="home"></i> </div>
                             <div class="top-menu__title"> Home </div>
                         </a>
@@ -41,13 +41,13 @@
                         </a>
                         <ul class="">
                             <li>
-                                <a href="#" class="top-menu">
+                                <a href="{{ route('homeruangan') }}" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="list"></i> </div>
                                     <div class="top-menu__title"> Data Ruangan </div>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="top-menu">
+                                <a href="{{ route('homesarprasruangan') }}" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="list"></i> </div>
                                     <div class="top-menu__title"> Data Sarpras Ruangan </div>
                                 </a>
@@ -88,6 +88,26 @@
                                         <a href="#" class="top-menu">
                                             <div class="top-menu__icon"> <i data-feather="file-plus"></i> </div>
                                             <div class="top-menu__title">Request Sarana Kelas</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:;" class="top-menu">
+                                    <div class="top-menu__icon"> <i data-feather="file-text"></i> </div>
+                                    <div class="top-menu__title"> Laporan Ruangan <i data-feather="chevron-down" class="top-menu__sub-icon"></i> </div>
+                                </a>
+                                <ul class="">
+                                    <li>
+                                        <a href="{{ route('homelaporansarprasruangan') }}" class="top-menu">
+                                            <div class="top-menu__icon"> <i data-feather="file-plus"></i> </div>
+                                            <div class="top-menu__title">Sarana Ruangan</div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="top-menu">
+                                            <div class="top-menu__icon"> <i data-feather="file-plus"></i> </div>
+                                            <div class="top-menu__title">Request Sarana Ruangan</div>
                                         </a>
                                     </li>
                                 </ul>
@@ -147,7 +167,7 @@
             <div class="top-bar-boxed border-b border-theme-2 -mt-7 md:-mt-5 -mx-3 sm:-mx-8 px-3 sm:px-8 md:pt-0 mb-12">
                 <div class="h-full flex items-center">
                     <!-- BEGIN: Logo -->
-                        <a href="" class="-intro-x hidden md:flex">
+                        <a href="{{ route('home') }}" class="-intro-x hidden md:flex">
                             <img alt="Icewall Tailwind HTML Admin Template" class="w-6" src="{{ asset('back/images/logo.png') }}">
                             <span class="text-white text-lg ml-3"> SMA<span class="font-medium">Yappenda</span> </span>
                         </a>
@@ -190,7 +210,7 @@
             <nav class="top-nav">
                 <ul>
                     <li>
-                        <a href="#" class="top-menu top-menu--active">
+                        <a href="{{ route('home') }}" class="top-menu top-menu--active">
                             <div class="top-menu__icon"> <i data-feather="home"></i> </div>
                             <div class="top-menu__title"> Home </div>
                         </a>
@@ -208,7 +228,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="top-menu">
+                                <a href="{{ route('homesarprasruangan') }}" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="list"></i> </div>
                                     <div class="top-menu__title"> Data Sarpras Ruangan </div>
                                 </a>
@@ -249,6 +269,26 @@
                                         <a href="#" class="top-menu">
                                             <div class="top-menu__icon"> <i data-feather="file-plus"></i> </div>
                                             <div class="top-menu__title">Request Sarana Kelas</div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:;" class="top-menu">
+                                    <div class="top-menu__icon"> <i data-feather="file-text"></i> </div>
+                                    <div class="top-menu__title"> Laporan Ruangan <i data-feather="chevron-down" class="top-menu__sub-icon"></i> </div>
+                                </a>
+                                <ul class="">
+                                    <li>
+                                        <a href="{{ route('homelaporansarprasruangan') }}" class="top-menu">
+                                            <div class="top-menu__icon"> <i data-feather="file-plus"></i> </div>
+                                            <div class="top-menu__title">Sarana Ruangan</div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="top-menu">
+                                            <div class="top-menu__icon"> <i data-feather="file-plus"></i> </div>
+                                            <div class="top-menu__title">Request Sarana Ruangan</div>
                                         </a>
                                     </li>
                                 </ul>

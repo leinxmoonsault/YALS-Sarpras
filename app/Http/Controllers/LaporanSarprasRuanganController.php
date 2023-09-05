@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kelas;
 use App\Models\Laporan;
-use App\Models\SarprasKelas;
+use App\Models\Ruangan;
+use App\Models\SarprasRuangan;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Yajra\DataTables\Facades\DataTables;
 
-class LaporanSarprasKelasController extends Controller
+class LaporanSarprasRuanganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,20 +20,20 @@ class LaporanSarprasKelasController extends Controller
      */
     public function index()
     {
-        return view('mlaporankelas.index');
+        return view('mlaporanruangan.index');
     }
 
-    public function getLaporanSarprasKelas(Request $request) {
+    public function getLaporanSarprasRuangan(Request $request) {
         if ($request->ajax()) {
-            $param  = '/SPS/KLS';
+            $param  = '/SPS/RNA';
             $data = Laporan::where('id_laporan','like','%'.$param.'%')
             ->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $editBtn = '<a href="'. route("Pass.show", $row->id) .'" class="edit btn btn-primary btn-sm mb-2" target="_blank">Show</a>';
+                    $editBtn = '<a href="'. route("Toss.show", $row->id) .'" class="edit btn btn-primary btn-sm mb-2" target="_blank">Show</a>';
 
-                    $deleteForm = '<form class="delete" action="' . route("Pass.destroy", $row->id) . '" method="POST" onsubmit="return confirm(\'Hapus Data Kelas Ini ?\')">
+                    $deleteForm = '<form class="delete" action="' . route("Toss.destroy", $row->id) . '" method="POST" onsubmit="return confirm(\'Hapus Data Kelas Ini ?\')">
                                     ' . csrf_field() . '
                                     ' . method_field('DELETE') . '
                                     <input type="submit" value="Delete" class="btn btn-danger btn-sm">
@@ -53,17 +53,16 @@ class LaporanSarprasKelasController extends Controller
      */
     public function create()
     {
-        $data = \App\Models\Kelas::all();
+        $data = \App\Models\Ruangan::all();
 
-        return view('mlaporankelas.create', ['kelas' => $data]);
+        return view('mlaporanruangan.create', ['ruangan' => $data]);
     }
 
-    public function getExistedLaporanData($id)
+    public function getExistedLaporanRuanganData($id)
     {
-        $data   =   \App\Models\SarprasKelas::where('id_kelas_sarpras', $id)->get();
+        $data   =   \App\Models\SarprasRuangan::where('id_ruangan_sarpras', $id)->get();
         return response()->json($data);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -74,17 +73,17 @@ class LaporanSarprasKelasController extends Controller
     {
         // Bikin Kode Unique
         $new_laporan = new \App\Models\Laporan();
-        $param  = '/SPS/KLS';
+        $param  = '/SPS/RNA';
         $carilap = Laporan::where('id_laporan','like','%'.$param.'%')->orderBy('id', 'DESC')->value('id_laporan');
-        $count = Laporan::orderBy('created_at', 'DESC')->count();
+        $count = Laporan::where('id_laporan','like','%'.$param.'%')->orderBy('created_at', 'DESC')->count();
         
         if ($count == 0) {
             # code...
-            $idlap = "SMA-YAPPENDA/LAP/SPS/KLS/001";
+            $idlap = "SMA-YAPPENDA/LAP/SPS/RNA/001";
         }else {
             # code...
             $delete = preg_replace('/\D/', '', $carilap);
-            $idlap = 'SMA-YAPPENDA/LAP/SPS/KLS/'.str_pad($delete+1,3,"0",STR_PAD_LEFT);
+            $idlap = 'SMA-YAPPENDA/LAP/SPS/RNA/'.str_pad($delete+1,3,"0",STR_PAD_LEFT);
         }
         // End Bikin Kode Unique
         
@@ -92,20 +91,19 @@ class LaporanSarprasKelasController extends Controller
         // Prep Data
         $user   = Auth::user()->nama;
         // End Prep Data
-
         // Cari Data Kelas
-        $carikelas  = Kelas::where('id_kelas','=', $request->get('kelas'))->first();
+        $cariruangan  = Ruangan::where('id_ruangan','=', $request->get('ruangan'))->first();
         // End Cari Data Kelas
-
+        
         // Format Data
         $newdate        = date('Y-m-d', strtotime($request->get('tanggal')));
-        $nama_laporan   = 'Laporan-Sarpras-'.$carikelas->nama_kelas.'-'.$newdate.'.pdf';
-        $savePDF        = public_path('Laporan/Sarpras-Kelas/').$nama_laporan;
+        $nama_laporan   = 'Laporan-Sarpras-'.$cariruangan->nama_kelas.'-'.$newdate.'.pdf';
+        $savePDF        = public_path('Laporan/Sarpras-Ruangan/').$nama_laporan;
         // End Format Data
 
         // Insert Ke Database
         $new_laporan->id_laporan        = $idlap;
-        $new_laporan->id_pass_laporan  = $request->get('kelas');
+        $new_laporan->id_pass_laporan  = $request->get('ruangan');
         $new_laporan->nama_laporan      = $nama_laporan;
         $new_laporan->tanggal_laporan   = $newdate;
         $new_laporan->file_laporan      = $savePDF;
@@ -114,24 +112,24 @@ class LaporanSarprasKelasController extends Controller
         $new_laporan->save();
         // End Insert Ke Database
         // Search Data Untuk Generate PDF
-        $predata        = SarprasKelas::where('id_kelas_sarpras','=',$carikelas->id_kelas)->get()->all();
-        $data_kelas     = Kelas::where('id_kelas','=',$carikelas->id_kelas)->first();
-        $generatePDF    = PDF::loadView('mlaporankelas.laporan', ['data' => $predata,'kelas' => $data_kelas,'i' => 0]);
+        $predata        = SarprasRuangan::where('id_ruangan_sarpras','=',$cariruangan->id_ruangan)->get()->all();
+        $data_ruangan   = Ruangan::where('id_ruangan','=',$cariruangan->id_ruangan)->first();
+        $generatePDF    = PDF::loadView('mlaporanruangan.laporan', ['data' => $predata, 'data_ruangan'  => $data_ruangan ,'i' => 0]);
         // End Search Data Untuk Generate PDF
 
         // Save PDF
         $generatePDF->save($savePDF);
         // End Save PDF
 
-        return redirect()->route('print_laporan_sarpras', ['id' => $carikelas->id_kelas]);
+        return redirect()->route('print_laporan_sarpras_ruangan', ['id' => $cariruangan->id_ruangan]);
     }
 
-    public function print_laporan_sarpras($id)
+    public function print_laporan_sarpras_ruangan($id)
     {
-        $predata        = SarprasKelas::where('id_kelas_sarpras','=',$id)->get();
-        $data_kelas     = Kelas::where('id_kelas','=',$id)->first();
-
-        $pdf = PDF::loadView('mlaporankelas.laporan', ['data' => $predata,'kelas' => $data_kelas,'i' => 0]);
+        $predata        = SarprasRuangan::where('id_ruangan_sarpras','=',$id)->get();
+        $data_ruangan   = Ruangan::where('id_ruangan','=',$id)->first();
+        
+        $pdf = PDF::loadView('mlaporanruangan.laporan', ['data' => $predata, 'data_ruangan'  => $data_ruangan ,'i' => 0]);
         return $pdf->stream("", array("Attachment" => false));
     }
 
@@ -144,8 +142,8 @@ class LaporanSarprasKelasController extends Controller
     public function show($id)
     {
         $item = Laporan::findOrFail($id);
-        $predata    = SarprasKelas::where('id_kelas_sarpras','=',$item->id_pass_laporan)->get();
-        $pdf = PDF::loadView('mlaporankelas.laporan', ['data' => $predata,'i' => 0]);
+        $predata    = SarprasRuangan::where('id_ruangan_sarpras','=',$item->id_pass_laporan)->get();
+        $pdf = PDF::loadView('mlaporanruangan.laporan', ['data' => $predata,'i' => 0]);
         return $pdf->stream("", array("Attachment" => false));
     }
 

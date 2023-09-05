@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\LaporanSarprasKelasController;
+use App\Http\Controllers\LaporanSarprasRuanganController;
 use App\Http\Controllers\ManageKelasController;
 use App\Http\Controllers\ManageRuanganController;
 use App\Http\Controllers\ManageSarprasKelasController;
+use App\Http\Controllers\ManageSarprasRuanganController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,11 +48,11 @@ Route::group(['middleware'  =>  ['auth', 'cekRole:Admin,Sarpras']], function (){
     });
     
     Route::group(['prefix'  =>  'YALS/Administrator/Manage/Sarpras/Ruangan/'], function () {
-        Route::get('/', [\App\Http\Controllers\ManageSarprasKelasController::class, 'index'])->name('homesarpraskelas');      
-        Route::get('Edit', [\App\Http\Controllers\ManageSarprasKelasController::class,'editDataSarprasKelas'])->name('editdatasarpras');
-        Route::get('List', [\App\Http\Controllers\ManageSarprasKelasController::class,'getSarprasKelas'])->name('saprasKelas.list');
-        Route::get('Existed/{id}', [\App\Http\Controllers\ManageSarprasKelasController::class,'getExistedData'])->name('getExisted.data');
-        Route::resource('Aksi', ManageSarprasKelasController::class);
+        Route::get('/', [\App\Http\Controllers\ManageSarprasRuanganController::class, 'index'])->name('homesarprasruangan');      
+        Route::get('Edit', [\App\Http\Controllers\ManageSarprasRuanganController::class,'editDataSarprasRuangan'])->name('editdatasarprasruangan');
+        Route::get('List', [\App\Http\Controllers\ManageSarprasRuanganController::class,'getSarprasRuangan'])->name('saprasRuangan.list');
+        Route::get('Existed/{id}', [\App\Http\Controllers\ManageSarprasRuanganController::class,'getExistedRuanganData'])->name('getExistedRuangan.data');
+        Route::resource('Do', ManageSarprasRuanganController::class);
     });
 
     Route::group(['prefix'  =>  'YALS/Administrator/Laporan/Sarpras/Kelas/'], function () {
@@ -59,5 +61,13 @@ Route::group(['middleware'  =>  ['auth', 'cekRole:Admin,Sarpras']], function (){
         Route::get('Existed/{id}', [\App\Http\Controllers\LaporanSarprasKelasController::class,'getExistedLaporanData'])->name('getExistedLaporan.data');
         Route::get('Pass/Cetak-Laporan-Sarpras/{id}',[\App\Http\Controllers\LaporanSarprasKelasController::class, 'print_laporan_sarpras'])->name('print_laporan_sarpras');
         Route::resource('Pass', LaporanSarprasKelasController::class);
+    });
+
+    Route::group(['prefix'  =>  'YALS/Administrator/Laporan/Sarpras/Ruangan/'], function () {
+        Route::get('/', [\App\Http\Controllers\LaporanSarprasRuanganController::class, 'index'])->name('homelaporansarprasruangan');      
+        Route::get('List', [\App\Http\Controllers\LaporanSarprasRuanganController::class,'getLaporanSarprasRuangan'])->name('laporanSaprasRuangan.list');
+        Route::get('Existed/{id}', [\App\Http\Controllers\LaporanSarprasRuanganController::class,'getExistedLaporanRuanganData'])->name('getExistedLaporanRuangan.data');
+        Route::get('Toss/Cetak-Laporan-Sarpras/{id}',[\App\Http\Controllers\LaporanSarprasRuanganController::class, 'print_laporan_sarpras_ruangan'])->name('print_laporan_sarpras_ruangan');
+        Route::resource('Toss', LaporanSarprasRuanganController::class);
     });
 });

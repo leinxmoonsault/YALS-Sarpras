@@ -21,13 +21,13 @@
 </head>
 <body>
       <div>
-            <img src="{{ public_path('Laporan/kop.png') }}" alt="KopSurat" width="100%">
+            <img src="{{ public_path('Laporan/kop_ruangan.png') }}" alt="KopSurat" width="100%">
       </div>
       <!-- Isi Surat -->
       <br>
       
       <div class="container text-center">
-            <h4 class="text-start">Kelas : </h4>
+            <h4 class="text-start">Ruangan : {{$data_ruangan->nama_ruangan}} / {{$data_ruangan->lantai}} </h4>
             <table class="table table-bordered mx-auto">
                   <thead>
                   <tr>
@@ -35,6 +35,7 @@
                         <th class="">Nama Barang</th>
                         <th class="">Jumlah Barang</th>
                         <th class="">Kondisi</th>
+                        <th class="">Keterangan</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -44,6 +45,7 @@
                         <td class="">{{$data->nama_barang}}</td>
                         <td class="">{{$data->jumlah_barang}}</td>
                         <td class="">{{$data->kondisi}}</td>
+                        <td class="">{{$data->keterangan}}</td>
                   </tr>
                   @endforeach
                   </tbody>

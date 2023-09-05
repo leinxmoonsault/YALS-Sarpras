@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2023 at 04:25 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.27
+-- Generation Time: Sep 05, 2023 at 10:51 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -45,9 +45,9 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `kelas` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `id_kelas` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_kelas` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lantai` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_kelas` varchar(20) NOT NULL,
+  `nama_kelas` varchar(255) NOT NULL,
+  `lantai` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -74,12 +74,12 @@ INSERT INTO `kelas` (`id`, `id_kelas`, `nama_kelas`, `lantai`, `created_at`, `up
 
 CREATE TABLE `laporan` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `id_laporan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_kelas_laporan` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_laporan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file_laporan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_laporan` varchar(100) NOT NULL,
+  `id_pass_laporan` varchar(20) NOT NULL,
+  `nama_laporan` varchar(100) NOT NULL,
+  `file_laporan` varchar(255) NOT NULL,
   `tanggal_laporan` date NOT NULL,
-  `update_by` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `update_by` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -88,8 +88,9 @@ CREATE TABLE `laporan` (
 -- Dumping data for table `laporan`
 --
 
-INSERT INTO `laporan` (`id`, `id_laporan`, `id_kelas_laporan`, `nama_laporan`, `file_laporan`, `tanggal_laporan`, `update_by`, `created_at`, `updated_at`) VALUES
-(128, 'SMA-YAPPENDA/LAP/SPS/KLS/001', 'KLS-0001', 'Laporan-Sarpras-X-1-2023-09-05.pdf', 'C:\\xampp\\htdocs\\yals-sarpras\\public\\Laporan/Sarpras-Kelas/Laporan-Sarpras-X-1-2023-09-05.pdf', '2023-09-05', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-05 03:49:13', '2023-09-05 03:49:13');
+INSERT INTO `laporan` (`id`, `id_laporan`, `id_pass_laporan`, `nama_laporan`, `file_laporan`, `tanggal_laporan`, `update_by`, `created_at`, `updated_at`) VALUES
+(128, 'SMA-YAPPENDA/LAP/SPS/KLS/001', 'KLS-0001', 'Laporan-Sarpras-X-1-2023-09-05.pdf', 'C:\\xampp\\htdocs\\yals-sarpras\\public\\Laporan/Sarpras-Kelas/Laporan-Sarpras-X-1-2023-09-05.pdf', '2023-09-05', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-05 03:49:13', '2023-09-05 03:49:13'),
+(139, 'SMA-YAPPENDA/LAP/SPS/RNA/001', 'RNA-0002', 'Laporan-Sarpras--2023-09-06.pdf', 'C:\\xampp\\htdocs\\YALS-Sarpras\\public\\Laporan/Sarpras-Ruangan/Laporan-Sarpras--2023-09-06.pdf', '2023-09-06', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-05 13:49:01', '2023-09-05 13:49:01');
 
 -- --------------------------------------------------------
 
@@ -99,7 +100,7 @@ INSERT INTO `laporan` (`id`, `id_laporan`, `id_kelas_laporan`, `nama_laporan`, `
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -115,7 +116,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2023_08_09_010911_kelas', 1),
 (6, '2023_08_09_012654_sarpras_kelas', 1),
 (7, '2023_09_02_132021_laporan', 2),
-(8, '2023_09_05_000157_ruangan', 3);
+(8, '2023_09_05_000157_ruangan', 3),
+(9, '2023_09_05_145516_sarprasruangan', 4);
 
 -- --------------------------------------------------------
 
@@ -124,8 +126,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -137,11 +139,11 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -155,9 +157,9 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `ruangan` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `id_ruangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_ruangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lantai` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_ruangan` varchar(255) NOT NULL,
+  `nama_ruangan` varchar(255) NOT NULL,
+  `lantai` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -182,13 +184,13 @@ INSERT INTO `ruangan` (`id`, `id_ruangan`, `nama_ruangan`, `lantai`, `created_at
 
 CREATE TABLE `sarpras_kelas` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `id_kelas_sarpras` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_barang_sarpras` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_barang` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jumlah_barang` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `kondisi` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keterangan` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `update_by` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_kelas_sarpras` varchar(255) NOT NULL,
+  `id_barang_sarpras` varchar(20) NOT NULL,
+  `nama_barang` varchar(100) NOT NULL,
+  `jumlah_barang` varchar(15) NOT NULL,
+  `kondisi` varchar(25) NOT NULL,
+  `keterangan` text NOT NULL,
+  `update_by` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -206,17 +208,47 @@ INSERT INTO `sarpras_kelas` (`id`, `id_kelas_sarpras`, `id_barang_sarpras`, `nam
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sarpras_ruangan`
+--
+
+CREATE TABLE `sarpras_ruangan` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `id_ruangan_sarpras` varchar(20) NOT NULL,
+  `id_barang_sarpras_ruangan` varchar(20) NOT NULL,
+  `nama_barang` varchar(100) NOT NULL,
+  `jumlah_barang` varchar(15) NOT NULL,
+  `kondisi` varchar(25) NOT NULL,
+  `keterangan` text NOT NULL,
+  `update_by` varchar(100) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `sarpras_ruangan`
+--
+
+INSERT INTO `sarpras_ruangan` (`id`, `id_ruangan_sarpras`, `id_barang_sarpras_ruangan`, `nama_barang`, `jumlah_barang`, `kondisi`, `keterangan`, `update_by`, `created_at`, `updated_at`) VALUES
+(1, 'RNA-0001', 'SRPSRNA-00001', 'AC', '2', 'Bagus', '-', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-05 12:29:38', '2023-09-05 12:29:38'),
+(2, 'RNA-0001', 'SRPSRNA-00002', 'Komputer', '3', 'Bagus', '-', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-05 12:29:38', '2023-09-05 12:29:38'),
+(4, 'RNA-0002', 'SRPSRNA-00004', 'Kipas Angin', '5', 'Bagus', '-', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-05 12:32:07', '2023-09-05 12:40:36'),
+(5, 'RNA-0002', 'SRPSRNA-00005', 'Mimbar', '1', 'Bagus', '-', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-05 12:32:07', '2023-09-05 12:32:07'),
+(6, 'RNA-0002', 'SRPSRNA-00006', 'Mic', '1', 'Bagus', '-', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-05 12:32:07', '2023-09-05 12:32:07');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` enum('Sarpras','Admin') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('Sarpras','Admin') NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -287,6 +319,12 @@ ALTER TABLE `sarpras_kelas`
   ADD UNIQUE KEY `id_barang_sarpras` (`id_barang_sarpras`);
 
 --
+-- Indexes for table `sarpras_ruangan`
+--
+ALTER TABLE `sarpras_ruangan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -313,13 +351,13 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `laporan`
 --
 ALTER TABLE `laporan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=130;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -338,6 +376,12 @@ ALTER TABLE `ruangan`
 --
 ALTER TABLE `sarpras_kelas`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `sarpras_ruangan`
+--
+ALTER TABLE `sarpras_ruangan`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
