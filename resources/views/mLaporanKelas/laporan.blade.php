@@ -27,7 +27,7 @@
       <br>
       
       <div class="container text-center">
-            <h4 class="text-start">Kelas : </h4>
+            <h4 class="text-start">Kelas : {{ $kelas->nama_kelas.'/'.$kelas->lantai }}</h4>
             <table class="table table-bordered mx-auto">
                   <thead>
                   <tr>

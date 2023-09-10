@@ -143,7 +143,9 @@ class LaporanSarprasRuanganController extends Controller
     {
         $item = Laporan::findOrFail($id);
         $predata    = SarprasRuangan::where('id_ruangan_sarpras','=',$item->id_pass_laporan)->get();
-        $pdf = PDF::loadView('mlaporanruangan.laporan', ['data' => $predata,'i' => 0]);
+        $data_ruangan   = Ruangan::where('id_ruangan','=',$item->id_pass_laporan)->first();
+
+        $pdf = PDF::loadView('mlaporanruangan.laporan', ['data' => $predata,'data_ruangan' => $data_ruangan,'i' => 0]);
         return $pdf->stream("", array("Attachment" => false));
     }
 

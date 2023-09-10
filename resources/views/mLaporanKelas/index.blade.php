@@ -18,7 +18,7 @@
                             <div class="intro-y box">
                                 <div class="flex flex-col sm:flex-row items-center p-5 border-b border-gray-200">
                                     <h2 class="font-medium text-base mr-auto">
-                                        Data Laporan
+                                        Data Laporan Kelas
                                     </h2>
                                     <div class="w-full sm:w-auto flex mt-4 sm:mt-0">
                                         <a href="{{ route('Pass.create')}}" class="btn btn-primary shadow-md mr-2" role="button">Buat Laporan Sarpras Kelas</a>

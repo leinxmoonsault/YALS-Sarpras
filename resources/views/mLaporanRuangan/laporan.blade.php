@@ -27,7 +27,7 @@
       <br>
       
       <div class="container text-center">
-            <h4 class="text-start">Ruangan : {{$data_ruangan->nama_ruangan}} / {{$data_ruangan->lantai}} </h4>
+            <h4 class="text-start">Ruangan : {{$data_ruangan->nama_ruangan.'/'.$data_ruangan->lantai}} </h4>
             <table class="table table-bordered mx-auto">
                   <thead>
                   <tr>

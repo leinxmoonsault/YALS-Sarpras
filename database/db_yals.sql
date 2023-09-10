@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2023 at 10:51 PM
+-- Generation Time: Sep 10, 2023 at 11:30 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -89,8 +89,10 @@ CREATE TABLE `laporan` (
 --
 
 INSERT INTO `laporan` (`id`, `id_laporan`, `id_pass_laporan`, `nama_laporan`, `file_laporan`, `tanggal_laporan`, `update_by`, `created_at`, `updated_at`) VALUES
-(128, 'SMA-YAPPENDA/LAP/SPS/KLS/001', 'KLS-0001', 'Laporan-Sarpras-X-1-2023-09-05.pdf', 'C:\\xampp\\htdocs\\yals-sarpras\\public\\Laporan/Sarpras-Kelas/Laporan-Sarpras-X-1-2023-09-05.pdf', '2023-09-05', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-05 03:49:13', '2023-09-05 03:49:13'),
-(139, 'SMA-YAPPENDA/LAP/SPS/RNA/001', 'RNA-0002', 'Laporan-Sarpras--2023-09-06.pdf', 'C:\\xampp\\htdocs\\YALS-Sarpras\\public\\Laporan/Sarpras-Ruangan/Laporan-Sarpras--2023-09-06.pdf', '2023-09-06', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-05 13:49:01', '2023-09-05 13:49:01');
+(139, 'SMA-YAPPENDA/LAP/SPS/RNA/001', 'RNA-0002', 'Laporan-Sarpras--2023-09-06.pdf', 'C:\\xampp\\htdocs\\YALS-Sarpras\\public\\Laporan/Sarpras-Ruangan/Laporan-Sarpras--2023-09-06.pdf', '2023-09-06', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-05 13:49:01', '2023-09-05 13:49:01'),
+(141, 'SMA-YAPPENDA/LAP/SPS/KLS/003', 'KLS-0001', 'Laporan-Sarpras-X-1-2023-09-10.pdf', 'C:\\xampp\\htdocs\\YALS-Sarpras\\public\\Laporan/Sarpras-Kelas/Laporan-Sarpras-X-1-2023-09-10.pdf', '2023-09-10', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-09 22:35:37', '2023-09-09 22:35:37'),
+(142, 'SMA-YAPPENDA/LAP/SPS/KLS/004', 'KLS-0002', 'Laporan-Sarpras-X-2-2023-09-10.pdf', 'C:\\xampp\\htdocs\\YALS-Sarpras\\public\\Laporan/Sarpras-Kelas/Laporan-Sarpras-X-2-2023-09-10.pdf', '2023-09-10', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-09 22:37:05', '2023-09-09 22:37:05'),
+(143, 'SMA-YAPPENDA/LAP/SPS/RNA/002', 'RNA-0001', 'Laporan-Sarpras--2023-09-10.pdf', 'C:\\xampp\\htdocs\\YALS-Sarpras\\public\\Laporan/Sarpras-Ruangan/Laporan-Sarpras--2023-09-10.pdf', '2023-09-10', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-09 22:43:47', '2023-09-09 22:43:47');
 
 -- --------------------------------------------------------
 
@@ -117,7 +119,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2023_08_09_012654_sarpras_kelas', 1),
 (7, '2023_09_02_132021_laporan', 2),
 (8, '2023_09_05_000157_ruangan', 3),
-(9, '2023_09_05_145516_sarprasruangan', 4);
+(9, '2023_09_05_145516_sarprasruangan', 4),
+(10, '2023_09_10_024547_req_sarpras', 5);
 
 -- --------------------------------------------------------
 
@@ -145,6 +148,27 @@ CREATE TABLE `personal_access_tokens` (
   `token` varchar(64) NOT NULL,
   `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request_sarpras`
+--
+
+CREATE TABLE `request_sarpras` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `id_req` varchar(20) NOT NULL,
+  `untuk_ruang` varchar(20) NOT NULL,
+  `nama_barang` varchar(100) NOT NULL,
+  `jumlah_barang` double NOT NULL,
+  `harga_barang` double NOT NULL,
+  `status` varchar(100) NOT NULL,
+  `keterangan` varchar(100) NOT NULL,
+  `tanggal_req` date NOT NULL,
+  `req_by` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -306,6 +330,12 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `request_sarpras`
+--
+ALTER TABLE `request_sarpras`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ruangan`
 --
 ALTER TABLE `ruangan`
@@ -351,19 +381,25 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `laporan`
 --
 ALTER TABLE `laporan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `request_sarpras`
+--
+ALTER TABLE `request_sarpras`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ruangan`
