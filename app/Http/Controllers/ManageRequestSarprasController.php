@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kelas;
 use App\Models\RequestSarpras;
 use App\Models\Ruangan;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
@@ -121,6 +122,15 @@ class ManageRequestSarprasController extends Controller
 
         return redirect()->route('homereqsarpras')->with('status','Siswa Berhasil Ditambah'); 
         
+    }
+
+    public function print_laporan_request_sarpras()
+    {
+        $predata        = RequestSarpras::orderBy('id', 'asc')->get();
+
+        
+        $pdf = PDF::loadView('mrequestsarpras.laporan', ['data' => $predata, 'i' => 0]);
+        return $pdf->stream("", array("Attachment" => false));
     }
 
     /**

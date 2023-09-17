@@ -89,7 +89,7 @@
                             <li>
                                 <a href="javascript:;" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="file-text"></i> </div>
-                                    <div class="top-menu__title"> Laporan Kelas <i data-feather="chevron-down" class="top-menu__sub-icon"></i> </div>
+                                    <div class="top-menu__title"> Inventory Kelas <i data-feather="chevron-down" class="top-menu__sub-icon"></i> </div>
                                 </a>
                                 <ul class="">
                                     <li>
@@ -103,7 +103,7 @@
                             <li>
                                 <a href="javascript:;" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="file-text"></i> </div>
-                                    <div class="top-menu__title"> Laporan Ruangan <i data-feather="chevron-down" class="top-menu__sub-icon"></i> </div>
+                                    <div class="top-menu__title"> Inventory Ruangan <i data-feather="chevron-down" class="top-menu__sub-icon"></i> </div>
                                 </a>
                                 <ul class="">
                                     <li>
@@ -272,7 +272,7 @@
                             <li>
                                 <a href="javascript:;" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="file-text"></i> </div>
-                                    <div class="top-menu__title"> Laporan Kelas <i data-feather="chevron-down" class="top-menu__sub-icon"></i> </div>
+                                    <div class="top-menu__title"> Inventory Kelas <i data-feather="chevron-down" class="top-menu__sub-icon"></i> </div>
                                 </a>
                                 <ul class="">
                                     <li>
@@ -286,7 +286,7 @@
                             <li>
                                 <a href="javascript:;" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="file-text"></i> </div>
-                                    <div class="top-menu__title"> Laporan Ruangan <i data-feather="chevron-down" class="top-menu__sub-icon"></i> </div>
+                                    <div class="top-menu__title"> Inventory Ruangan <i data-feather="chevron-down" class="top-menu__sub-icon"></i> </div>
                                 </a>
                                 <ul class="">
                                     <li>
