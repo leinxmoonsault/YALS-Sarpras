@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2023 at 11:30 PM
+-- Generation Time: Sep 24, 2023 at 11:23 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -35,6 +35,23 @@ CREATE TABLE `failed_jobs` (
   `payload` longtext NOT NULL,
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kebersihan_lantai`
+--
+
+CREATE TABLE `kebersihan_lantai` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `id_kebersihan` varchar(20) NOT NULL,
+  `nama_assets` varchar(100) NOT NULL,
+  `kebersihan` enum('Bersih','Tidak Bersih') NOT NULL,
+  `tanggal_kebersihan` date NOT NULL,
+  `update_by` varchar(100) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -120,7 +137,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (7, '2023_09_02_132021_laporan', 2),
 (8, '2023_09_05_000157_ruangan', 3),
 (9, '2023_09_05_145516_sarprasruangan', 4),
-(10, '2023_09_10_024547_req_sarpras', 5);
+(10, '2023_09_10_024547_req_sarpras', 5),
+(11, '2023_09_24_174933_kebersihan', 6);
 
 -- --------------------------------------------------------
 
@@ -172,6 +190,14 @@ CREATE TABLE `request_sarpras` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `request_sarpras`
+--
+
+INSERT INTO `request_sarpras` (`id`, `id_req`, `untuk_ruang`, `nama_barang`, `jumlah_barang`, `harga_barang`, `status`, `keterangan`, `tanggal_req`, `req_by`, `created_at`, `updated_at`) VALUES
+(2, 'REQSRPS-00001', 'RNA-0002', 'AC', 3, 2000000, 'Belum Diapprove Kepala Sekolah dan Yayasan', 'Pendingin Ruangan', '2023-09-17', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-17 09:39:18', '2023-09-17 09:39:18'),
+(3, 'REQSRPS-00002', 'RNA-0002', 'Mic', 1, 500000, 'Belum Diapprove Kepala Sekolah dan Yayasan', 'Mic', '2023-09-17', 'Reshita Gusti Vianinggar, S.Pd', '2023-09-17 09:39:18', '2023-09-17 09:39:18');
 
 -- --------------------------------------------------------
 
@@ -297,6 +323,12 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `kebersihan_lantai`
+--
+ALTER TABLE `kebersihan_lantai`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `kelas`
 --
 ALTER TABLE `kelas`
@@ -372,6 +404,12 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `kebersihan_lantai`
+--
+ALTER TABLE `kebersihan_lantai`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
@@ -387,7 +425,7 @@ ALTER TABLE `laporan`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -399,7 +437,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `request_sarpras`
 --
 ALTER TABLE `request_sarpras`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ruangan`

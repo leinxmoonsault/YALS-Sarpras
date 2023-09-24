@@ -127,14 +127,14 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" class="top-menu">
+                                        <a href="{{ route('homeKebersihanSekolah') }}" class="top-menu">
                                             <div class="top-menu__icon"> <i data-feather="file-plus"></i> </div>
                                             <div class="top-menu__title">Kebersihan Lantai</div>
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="javascript:;" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="file-text"></i> </div>
                                     <div class="top-menu__title"> Laporan Annual <i data-feather="chevron-down" class="top-menu__sub-icon"></i> </div>
@@ -159,7 +159,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
                 </ul>
@@ -317,7 +317,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="javascript:;" class="top-menu">
                                     <div class="top-menu__icon"> <i data-feather="file-text"></i> </div>
                                     <div class="top-menu__title"> Laporan Annual <i data-feather="chevron-down" class="top-menu__sub-icon"></i> </div>
@@ -342,7 +342,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
                 </ul>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LaporanSarprasKelasController;
 use App\Http\Controllers\LaporanSarprasRuanganController;
+use App\Http\Controllers\ManageKebersihanSekolah;
 use App\Http\Controllers\ManageKelasController;
 use App\Http\Controllers\ManageRequestSarprasController;
 use App\Http\Controllers\ManageRuanganController;
@@ -78,5 +79,14 @@ Route::group(['middleware'  =>  ['auth', 'cekRole:Admin,Sarpras']], function (){
         Route::get('List', [\App\Http\Controllers\ManageRequestSarprasController::class,'getReqSarpras'])->name('reqSapras.list');
         Route::get('Existed/{id}', [\App\Http\Controllers\ManageRequestSarprasController::class,'getExistedReqData'])->name('getExistedReq.data');
         Route::resource('Try', ManageRequestSarprasController::class);
+    });
+
+    Route::group(['prefix'  =>  'YALS/Administrator/Manage/Kebersihan/Sekolah/'], function () {
+        Route::get('/', [\App\Http\Controllers\ManageKebersihanSekolah::class, 'index'])->name('homeKebersihanSekolah');      
+        Route::get('Edit', [\App\Http\Controllers\ManageKebersihanSekolah::class,'editReqClean'])->name('editKebersihanSekolah');
+        Route::get('List', [\App\Http\Controllers\ManageKebersihanSekolah::class,'getReqClean'])->name('reqClean.list');
+        Route::get('Mounth', [\App\Http\Controllers\ManageKebersihanSekolah::class,'getMonthClean'])->name('getMonthClean.data');
+        Route::get('Existed/{id}', [\App\Http\Controllers\ManageKebersihanSekolah::class,'getExistedCleanData'])->name('getExistedClean.data');
+        Route::resource('Jump', ManageKebersihanSekolah::class);
     });
 });
