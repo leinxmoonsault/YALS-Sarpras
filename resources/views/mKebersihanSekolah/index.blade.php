@@ -25,14 +25,14 @@
                                             <option value="">Pilih Bulan</option>
                                                 <option value="January">January</option>
                                                 <option value="February">February</option>
-                                                <option value="Maret">Maret</option>
+                                                <option value="March">Maret</option>
                                                 <option value="April">April</option>
-                                                <option value="Mei">Mei</option>
+                                                <option value="May">Mei</option>
                                                 <option value="Juni">Juni</option>
                                                 <option value="July">July</option>
-                                                <option value="Agustus">Agustus</option>
+                                                <option value="Augustus">Agustus</option>
                                                 <option value="September">September</option>
-                                                <option value="Oktober">Oktober</option>
+                                                <option value="Ocktober">Oktober</option>
                                                 <option value="November">November</option>
                                                 <option value="December">December</option>
                                         </select>
@@ -104,6 +104,6 @@
                 ]
             });
         });
-    });
+    }); 
 </script>
 @endpush

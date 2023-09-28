@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KebersihanSekolah;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ManageKebersihanSekolah extends Controller
 {
@@ -14,7 +15,17 @@ class ManageKebersihanSekolah extends Controller
      */
     public function index()
     {
-        //
+        return view('mkebersihansekolah.index');
+    }
+
+    public function getReqSarpras(Request $request) {
+        if ($request->ajax()) {
+            $bulan = $request->input('bulan');
+            $data = KebersihanSekolah::whereRaw("MONTH(tanggal_kebersihan) = MONTH(STR_TO_DATE('$bulan', '%M'))")->orderBy('id', 'asc')->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->make(true);
+        }
     }
 
     /**
